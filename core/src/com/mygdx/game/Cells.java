@@ -15,12 +15,13 @@ public class Cells {
     int GValue;
     int HValue;
     int X, Y;
+    int cost;
+    String id;
     Cells parent;
     String weight;
     LinkedList<Cells> neighbor = new LinkedList<Cells>();
     public Cells(String name) {
         cell = new Sprite(new Texture(name));
-
     }
 
 
@@ -39,12 +40,22 @@ public class Cells {
     public void setNeighbour(Cells s) {
         neighbor.add(s);
     }
+    public void setId(String id){
+        this.id = id;
+    }
+    public String getId(){
+        return this.id;
+    }
 
-    public int getCost() {
+    public void setCost(){
         if (this.getParent() != null){
-            return this.getParent().getCost() + this.getGValue();
+            this.cost = this.getParent().getCost()  + this.getGValue();
+        }else {
+            this.cost = this.getGValue();
         }
-        return this.getGValue();
+    }
+    public int getCost() {
+        return cost;
     }
 
     public void setX(int x) {
@@ -93,7 +104,7 @@ public class Cells {
         return cell;
     }
 
-    public float getHValue() {
+    public int getHValue() {
         return HValue;
     }
 
